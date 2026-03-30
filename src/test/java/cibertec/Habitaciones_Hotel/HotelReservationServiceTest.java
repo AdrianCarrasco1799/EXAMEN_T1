@@ -33,5 +33,13 @@ public class HotelReservationServiceTest {
         String res3 = service.registrarReserva("1A2", "Juan Perez", LocalDate.now().plusDays(1));
         assertEquals("Ingrese una habitación valida", res3);
     }
-
+    @Test
+    @DisplayName("Validacion Nombre Cliente")
+    public void ValidacionNombreCliente() {
+        String res1 = service.registrarReserva("101", "Ana", LocalDate.now().plusDays(1));
+        assertEquals("Recuerde que el nombre del cliente debe contener al menos cuatro caracteres", res1);
+        String res2 = service.registrarReserva("101", "Juan1", LocalDate.now().plusDays(1));
+        assertEquals("Recuerde que el nombre del cliente debe contener al menos cuatro caracteres", res2);
+    }
+    
 }
