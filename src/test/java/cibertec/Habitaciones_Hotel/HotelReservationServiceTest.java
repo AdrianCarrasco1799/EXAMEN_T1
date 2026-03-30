@@ -51,4 +51,12 @@ public class HotelReservationServiceTest {
         String res2 = service.registrarReserva("101", "Juan", hoy);
         assertEquals("Debe ingresar una fecha valida", res2);
     }
+    @Test
+    @DisplayName("Registro Exitoso")
+    public void RegistroExitoso() {
+        LocalDate futuro = LocalDate.now().plusDays(5);
+        String resultado = service.registrarReserva("205", "Carlos", futuro);
+        assertEquals("El registro ha sido exitoso", resultado);
+    }
+
 }
