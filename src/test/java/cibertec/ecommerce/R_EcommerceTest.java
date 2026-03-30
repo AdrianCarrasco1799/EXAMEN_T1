@@ -75,5 +75,19 @@ public class R_EcommerceTest {
         verify(clienteRepository, times(1)).obtenerPorId(1L);
         verify(productoRepository, times(1)).obtenerPorId(1L);
     }
-
+    @Test
+    @DisplayName("Crear Orden Falla Por Falta DeStock")
+    void CrearOrdenFallaPorFaltaDeStock() {
+        List<Long> productoIds = Arrays.asList(2L);
+        Map<Long, Integer> cantidades = new HashMap<>();
+        cantidades.put(2L, 1);
+        when(clienteRepository.obtenerPorId(1L)).thenReturn(clienteActivo);
+        when(productoRepository.obtenerPorId(2L)).thenReturn(productoSinStock);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            ecommerceService.crearOrden(1L, productoIds, cantidades);
+        });
+        assertEquals("Stock insuficiente para el producto: Teclado Mecánico", exception.getMessage());
+        verify(clienteRepository, times(1)).obtenerPorId(1L);
+        verify(productoRepository, times(1)).obtenerPorId(2L);
+    }
 }
