@@ -23,5 +23,15 @@ public class HotelReservationServiceTest {
         String res3 = service.registrarReserva("101", "Juan Perez", null);
         assertEquals("Debe ingresar los datos requeridos", res3);
     }
+    @Test
+    @DisplayName("Validacion Numero Habitacion")
+    public void ValidacionNumeroHabitacion() {
+        String res1 = service.registrarReserva("401", "Juan Perez", LocalDate.now().plusDays(1));
+        assertEquals("Ingrese una habitación valida", res1);
+        String res2 = service.registrarReserva("12", "Juan Perez", LocalDate.now().plusDays(1));
+        assertEquals("Ingrese una habitación valida", res2);
+        String res3 = service.registrarReserva("1A2", "Juan Perez", LocalDate.now().plusDays(1));
+        assertEquals("Ingrese una habitación valida", res3);
+    }
 
 }
