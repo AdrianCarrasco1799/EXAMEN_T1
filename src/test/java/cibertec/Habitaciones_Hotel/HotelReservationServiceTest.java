@@ -58,5 +58,12 @@ public class HotelReservationServiceTest {
         String resultado = service.registrarReserva("205", "Carlos", futuro);
         assertEquals("El registro ha sido exitoso", resultado);
     }
-
+    @Test
+    @DisplayName("Validacion Numero Habitacion Demasiados Caracteres")
+    public void ValidacionNumeroHabitacionDemasiadosCaracteres() {
+        String res1 = service.registrarReserva("1001", "Juan Perez", LocalDate.now().plusDays(1));
+        assertEquals("Ingrese una habitación valida", res1);
+        String res2 = service.registrarReserva("20500", "Juan Perez", LocalDate.now().plusDays(1));
+        assertEquals("Ingrese una habitación valida", res2);
+    }
 }
